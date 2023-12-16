@@ -1,30 +1,79 @@
-# React + TypeScript + Vite
+# SH React Calendar
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+This project is for Task – 2 (Date Range Component for cross months), and is built by [Vite](https://vitejs.dev/) with the template of React + Typescript.
 
-Currently, two official plugins are available:
+The project is mainly composed of 2 folders - `lib` and `src`.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- `lib`: the source of `sh-react-calendar` library.
+- `src`: the testbed for the development or the preview of the library.
 
-## Expanding the ESLint configuration
+---
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+## Run The Project
 
-- Configure the top-level `parserOptions` property like this:
+Start the HMR server for development or for component preview.
 
-```js
-export default {
-  // other rules...
-  parserOptions: {
-    ecmaVersion: 'latest',
-    sourceType: 'module',
-    project: ['./tsconfig.json', './tsconfig.node.json'],
-    tsconfigRootDir: __dirname,
-  },
-}
+1. Ensure to have node `20.10.0` ready and dependencies installed by `yarn`.
+
+```shell
+nvm install 20.10.0
+nvm use 20.10.0
+
+npm install -g yarn
+yarn
 ```
 
-- Replace `plugin:@typescript-eslint/recommended` to `plugin:@typescript-eslint/recommended-type-checked` or `plugin:@typescript-eslint/strict-type-checked`
-- Optionally add `plugin:@typescript-eslint/stylistic-type-checked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and add `plugin:react/recommended` & `plugin:react/jsx-runtime` to the `extends` list
+2. Start the server
+
+```shell
+yarn dev
+```
+
+---
+
+## Build The Project
+
+Build `lib` sources into `dist` folder as a library, `sh-react-calendar`, for further _publishing (not implemented)_ and reusing.
+
+1. Ensure to have dependencies ready (same prerequisite as running the project)
+
+```shell
+nvm install 20.10.0
+nvm use 20.10.0
+
+npm install -g yarn
+yarn
+```
+
+2. Bundle `lib` into `dist`
+
+```shell
+yarn build
+```
+
+---
+
+## To Use The Library
+
+The way to use the library is documented in the sample testbed - `src/App.tsx`.
+
+```tsx
+import { useState } from 'react';
+import { Calendar } from 'dist/sh-react-calendar'; /* replace the source path after publishing to any respository */
+
+export default function App() {
+  const [dateRange, setDateRange] = useState<Array<Date>>([]);
+
+  return (
+    <div>
+      <Calendar locale="zh-TW" onRangeChanged={setDateRange} />
+      {dateRange?.length >= 2 && (
+        <p>
+          Selected: {dateRange[0]?.toLocaleDateString()} -{' '}
+          {dateRange[1]?.toLocaleDateString()}
+        </p>
+      )}
+    </div>
+  );
+}
+```
