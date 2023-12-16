@@ -1,0 +1,29 @@
+.day {
+  width: 50px;
+  height: 36px;
+}
+.day:hover {
+  background-color: #e6e6e6;
+}
+
+.default {
+  composes: day;
+}
+
+.lighter {
+  composes: day;
+  color: #757575;
+}
+
+.active {
+  composes: day;
+  background-color: #006edc;
+}
+.active:hover {
+  background-color: #006edc;
+}
+
+.today {
+  composes: day;
+  background-color: #ffff76;
+}
