@@ -19,6 +19,7 @@ export default function CalendarHeader({
   return (
     <div className={classes.header} style={style}>
       <button
+        data-testid="calendar-header-left-button"
         disabled={!onLeftClick}
         className={`${sharedClasses.btn} ${classes.btn}`}
         onClick={onLeftClick}
@@ -27,6 +28,7 @@ export default function CalendarHeader({
       </button>
       <div onClick={onTextClick}>{text}</div>
       <button
+        data-testid="calendar-header-right-button"
         disabled={!onRightClick}
         className={`${sharedClasses.btn} ${classes.btn}`}
         onClick={onRightClick}

@@ -1,3 +1,6 @@
+/// <reference types="vitest" />
+/// <reference types="vite/client" />
+
 import { defineConfig } from 'vite';
 import react from '@vitejs/plugin-react';
 import dts from 'vite-plugin-dts';
@@ -38,5 +41,17 @@ export default defineConfig({
         },
       },
     },
+  },
+  test: {
+    /* globals: to use vitest API globally (no need to import APIs like it, expect, etc.) */
+    globals: true,
+    environment: 'jsdom',
+    css: {
+      modules: {
+        /* non-scoped: to allow non-hashed class name for testing */
+        classNameStrategy: 'non-scoped',
+      },
+    },
+    setupFiles: path.resolve(__dirname, 'test', 'setup.ts'),
   },
 });

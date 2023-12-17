@@ -31,7 +31,7 @@ export default function CalendarBody({
   };
 
   return (
-    <div className={classes.calendarBody}>
+    <div data-testid="calendar-day-container" className={classes.calendarBody}>
       {dates?.map((date, i) => (
         <Day
           key={i}
